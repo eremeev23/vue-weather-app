@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  color: $white;
+  background: linear-gradient(#0442c0, #5790c2 90%);
+}
+
+input, button {
+  outline: none;
+  border: none;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+h2 {
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
+
+  @media screen and (max-width: 540px) {
+    margin-bottom: .8rem;
+  }
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media screen and (max-width: 1360px) {
+    max-width: calc(100% - 60px);
+  }
+
+  @media screen and (max-width: 1024px) {
+    max-width: calc(100% - 40px);
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: calc(100% - 20px);
+    font-size: 12px;
+  }
+}
