@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import axios, { AxiosError } from "axios";
-import { Coords, ResponseError, Weather, WeatherCity } from "@/types";
+import { ResponseError, Weather, WeatherCity, WeatherQueryParams } from "@/types";
 
 interface IState {
   locationsLat: string;
@@ -26,25 +26,21 @@ export const useMainStore = defineStore('mainStore', {
       this.cities = JSON.parse(localStorage.getItem("weather_cities") || "[]");
     },
 
-    async getWeatherData(coords?: Coords, cityName?: string): Promise<false | Weather> {
+    async getWeatherData(params: WeatherQueryParams): Promise<false | Weather> {
       try {
-        if (coords) {
-          return await axios
-            .get<Weather>(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lon}&units=metric&appid=924bdba454482fce947584b28d955c30`)
-            .then(({ data }) => {
-              this.currentCity = data.city;
-              this.weatherData = data;
-              return data;
-            })
-        } else {
-          return await axios
-            .get<Weather>(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=924bdba454482fce947584b28d955c30`)
-            .then(({ data }) => {
-              this.currentCity = data.city;
-              this.weatherData = data;
-              return data;
-            })
-        }
+        return await axios
+          .get<Weather>(`https://api.openweathermap.org/data/2.5/forecast`, {
+            params: {
+              units: "metric",
+              appid: "924bdba454482fce947584b28d955c30",
+              ...params
+            }
+          })
+          .then(({ data }) => {
+            this.currentCity = data.city;
+            this.weatherData = data;
+            return data;
+          })
         // @ts-ignore
       } catch (e: AxiosError) {
         this.error = {

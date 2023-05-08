@@ -45,8 +45,8 @@ const weatherByDay = computed<{ string: WeatherListItem }>(() => {
 })
 
 onBeforeMount(async () => {
-  if (typeof cityName === "string" && !weatherData.value) {
-    await getWeatherData(undefined, cityName);
+  if (typeof cityName === "string") {
+    await getWeatherData({ q: cityName });
   }
 })
 

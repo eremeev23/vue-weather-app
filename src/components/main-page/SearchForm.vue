@@ -30,7 +30,7 @@ const getLocationCity = () => {
 }
 
 const submitHandler = async () => {
-  await getWeatherData(undefined, searchCity.value)
+  await getWeatherData({ q: searchCity.value })
     .then((response: Weather | false) => {
       if (response) {
         searchCity.value = "";

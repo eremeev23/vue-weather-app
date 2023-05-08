@@ -65,4 +65,9 @@ export interface ResponseError {
   message: string;
 }
 
+export type WeatherQueryParams = {
+  lat?: string;
+  lon?: string;
+  q?: string;
+}
 
